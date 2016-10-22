@@ -4,6 +4,8 @@
 
 int xapple = random(8);
 int yapple = random(8);
+int speed = 250;
+int binary = 0;
 
 struct Point
 {
@@ -40,6 +42,7 @@ void loop()                     // run over and over again
  {
   direction = 270;
  }
+ 
  updateSnake();
  drawSnake();
  DrawPx(xapple,yapple,Red);
@@ -47,9 +50,17 @@ void loop()                     // run over and over again
   {
   xapple = random(8);
   yapple = random(8);
+  Tone_Start(18182, 50);
+  binary = binary * 2 + 1;
   }
+  if (binary > 255)
+  {
+    binary = 0;
+    Tone_Start(9000, 50);
+  }
+ SetAuxLEDs(binary);
  DisplaySlate(); 
- delay(250);
+ delay(speed);
  ClearSlate();
 }
 

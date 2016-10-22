@@ -1,6 +1,10 @@
 
 
 #include <MeggyJrSimple.h>    // Required code, line 1 of 2.
+
+int xapple = random(8);
+int yapple = random(8);
+
 struct Point
 {
   int x;
@@ -18,6 +22,7 @@ void setup()                    // run once, when the sketch starts
 
 void loop()                     // run over and over again
 {
+ 
  CheckButtonsDown();
  if (Button_Up)
  {
@@ -37,7 +42,12 @@ void loop()                     // run over and over again
  }
  updateSnake();
  drawSnake();
-
+ DrawPx(xapple,yapple,Red);
+  if (ReadPx(p1.x,p1.y) == Red)
+  {
+  xapple = random(8);
+  yapple = random(8);
+  }
  DisplaySlate(); 
  delay(250);
  ClearSlate();

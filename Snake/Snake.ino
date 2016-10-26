@@ -28,6 +28,7 @@ void setup()                    // run once, when the sketch starts
 
 void loop()                     // run over and over again
 {
+  updateSnake();
  
  CheckButtonsDown();
  if (Button_Up)
@@ -47,7 +48,7 @@ void loop()                     // run over and over again
   direction = 270;
  }
  
- updateSnake();
+
  drawSnake();
  DrawPx(xapple,yapple,Red);
   if (ReadPx(p1.x,p1.y) == Red)
@@ -71,49 +72,48 @@ void loop()                     // run over and over again
 //checks the direction and updates the x or y value.
 void updateSnake()
 {
-  //move body
+  //Move Body
   for (int i = marker - 1; i > 0; i--)
   {
-    //copy the value at i-1 into i
+    //Copy the value at i-1 into i
     snakeArray[i] = snakeArray[i - 1];
   }
   
-  
-  //move head
+  // Move head
   if (direction == 0)
-//updates y
-  snakeArray[0].y = snakeArray[0].y + 1;
-  //corrects for out of bounds
-  if (p1.y > 7)
-  {
-    snakeArray[0].y = 0;
-  }
+    //updates y
+    snakeArray[0].y = snakeArray [0].y + 1;
+    
+ 
+    if (snakeArray[0].y > 7)
+    {
+      snakeArray[0].y = 0;
+    }
   if (direction == 90)
-//updates x
-  snakeArray[0].x = snakeArray[0].x + 1;
-  //corrects for out of bounds
-  if (p1.x > 7)
-  {
-    snakeArray[0].x = 0;
-  }
+    //updates x
+    snakeArray[0].x = snakeArray[0].x + 1;
+    //corrects for out of bounds
+    if (snakeArray[0].x > 7)
+    {
+     snakeArray[0].x = 0;
+    } 
   if (direction == 180)
-//updates y
-  snakeArray[0].y = snakeArray[0].y - 1;
-  //corrects for out of bounds
-  if (p1.y < 0)
-  {
-    snakeArray[0].y = 7;
-  }
+    //updates y
+    snakeArray[0].y = snakeArray[0].y - 1;
+    
+    if (snakeArray[0].y < 0)
+    {
+      snakeArray[0].y = 7;
+    }
   if (direction == 270)
-//updates x
-  snakeArray[0].x = snakeArray[0].x - 1;
-  //corrects for out of bounds
-  if (p1.x < 0)
-  {
-    snakeArray[0].x = 7;
-  }
+    //updates x
+    snakeArray[0].x = snakeArray[0].x - 1;
+    
+    if (snakeArray[0].x < 0)
+    {
+     snakeArray[0].x = 7;
+    }
 }
-
 void drawSnake()
 {
   //Iterate the entire array to draw the snake

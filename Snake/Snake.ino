@@ -51,7 +51,7 @@ void loop()                     // run over and over again
 
  drawSnake();
  DrawPx(xapple,yapple,Red);
-  if (ReadPx(p1.x,p1.y) == Red)
+  if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Red)
   {
   xapple = random(8);
   yapple = random(8);
@@ -62,6 +62,7 @@ void loop()                     // run over and over again
   {
     binary = 0;
     Tone_Start(9000, 50);
+    speed = speed - 50;
   }
  SetAuxLEDs(binary);
  DisplaySlate(); 

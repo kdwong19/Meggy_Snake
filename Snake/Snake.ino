@@ -18,7 +18,7 @@ Point p2 = {4,4};
 Point p3 = {4,4};
 Point p4 = {4,4};
 Point snakeArray[64] = {p1,p2,p3,p4};
-int marker = 4;       //index of first empty segment of array
+int marker = 2;       //index of first empty segment of array
 int direction = 0;
 
 void setup()                    // run once, when the sketch starts
@@ -28,8 +28,16 @@ void setup()                    // run once, when the sketch starts
 
 void loop()                     // run over and over again
 {
-  updateSnake();
+  
+  drawSnake();
+  DrawPx(xapple,yapple,Red);
  
+  //Checks for overlap to end game
+  if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Yellow)
+  {
+    speed = -1;
+    //sets speed to negative to trigger crash and "end game"
+  }
  CheckButtonsDown();
  if (Button_Up)
  {
@@ -47,27 +55,29 @@ void loop()                     // run over and over again
  {
   direction = 270;
  }
+  updateSnake();
  
 
- drawSnake();
- DrawPx(xapple,yapple,Red);
   if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Red)
   {
   xapple = random(8);
   yapple = random(8);
   Tone_Start(18182, 50);
   binary = binary * 2 + 1;
+  marker = marker + 1;
   }
   if (binary > 255)
   {
     binary = 0;
     Tone_Start(9000, 50);
-    speed = speed - 50;
+    speed = speed - 25;
   }
  SetAuxLEDs(binary);
  DisplaySlate(); 
  delay(speed);
  ClearSlate();
+
+ 
 }
 
 //checks the direction and updates the x or y value.
@@ -118,9 +128,18 @@ void updateSnake()
 void drawSnake()
 {
   //Iterate the entire array to draw the snake
-  for (int i = 0; i < marker; i++)
+  DrawPx(snakeArray[0].x,snakeArray[0].y,Blue);
+  for (int i = 1; i < marker; i++)
   {
+   
     DrawPx(snakeArray[i].x, snakeArray[i].y,Yellow);
+    
   }
 }
+
+void death()
+{
+  
+}
+
 

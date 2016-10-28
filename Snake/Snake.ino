@@ -6,7 +6,7 @@ int xapple = random(8);
 int yapple = random(8);
 int speed = 250;
 int binary = 0;
-
+boolean gameOver = false;
 struct Point
 {
   int x;
@@ -15,9 +15,8 @@ struct Point
 
 Point p1 = {3,4};
 Point p2 = {4,4};
-Point p3 = {4,4};
-Point p4 = {4,4};
-Point snakeArray[64] = {p1,p2,p3,p4};
+
+Point snakeArray[64] = {p1,p2};
 int marker = 2;       //index of first empty segment of array
 int direction = 0;
 
@@ -29,14 +28,16 @@ void setup()                    // run once, when the sketch starts
 void loop()                     // run over and over again
 {
   
+if (gameOver == false)
+  {
   drawSnake();
   DrawPx(xapple,yapple,Red);
  
   //Checks for overlap to end game
   if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Yellow)
   {
-    speed = -1;
-    //sets speed to negative to trigger crash and "end game"
+    gameOver = true;
+    //sets endgame
   }
  CheckButtonsDown();
  if (Button_Up)
@@ -76,8 +77,9 @@ void loop()                     // run over and over again
  DisplaySlate(); 
  delay(speed);
  ClearSlate();
-
- 
+  }
+else
+death();
 }
 
 //checks the direction and updates the x or y value.
@@ -124,6 +126,7 @@ void updateSnake()
     {
      snakeArray[0].x = 7;
     }
+    
 }
 void drawSnake()
 {
@@ -139,7 +142,24 @@ void drawSnake()
 
 void death()
 {
-  
+  DrawPx(0,0,DimAqua);
+  DrawPx(1,1,DimAqua);
+  DrawPx(2,2,DimAqua);
+  DrawPx(3,3,DimAqua);
+  DrawPx(4,4,DimAqua);
+  DrawPx(5,5,DimAqua);
+  DrawPx(6,6,DimAqua);
+  DrawPx(7,7,DimAqua);
+  DrawPx(7,0,DimAqua);
+  DrawPx(6,1,DimAqua);
+  DrawPx(5,2,DimAqua);
+  DrawPx(4,3,DimAqua);
+  DrawPx(3,4,DimAqua);
+  DrawPx(2,5,DimAqua);
+  DrawPx(1,6,DimAqua);
+  DrawPx(0,7,DimAqua);
+  DisplaySlate();
+  delay(2000);
 }
 
 

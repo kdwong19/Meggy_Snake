@@ -28,7 +28,7 @@ void setup()                    // run once, when the sketch starts
 void loop()                     // run over and over again
 {
   
-if (gameOver == false)
+if (gameOver == false) //makes sure game isn't over
   {
   drawSnake();
   DrawPx(xapple,yapple,Red);
@@ -39,7 +39,7 @@ if (gameOver == false)
     gameOver = true;
     //sets endgame
   }
- CheckButtonsDown();
+ CheckButtonsDown(); // movement script
  if (Button_Up)
  {
   direction = 0;
@@ -59,8 +59,8 @@ if (gameOver == false)
   updateSnake();
  
 
-  if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Red)
-  {
+  if (ReadPx(snakeArray[0].x,snakeArray[0].y) == Red) 
+  {   // adds apple code and length growth code
   xapple = random(8);
   yapple = random(8);
   Tone_Start(18182, 50);
